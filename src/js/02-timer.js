@@ -19,7 +19,7 @@ const options = {
   onClose(selectedDates) {
     selectedTimeMs = selectedDates[0].getTime();
 
-    if (selectedTimeMs <= new Date().getTime()) {
+    if (selectedTimeMs <= Date.now()) {
       startButton.disabled = true;
       alert('Please choose a date in the future');
     } else {
@@ -29,7 +29,7 @@ const options = {
 };
 
 startButton.addEventListener('click', event => {
-  if (selectedTimeMs <= new Date().getTime()) {
+  if (selectedTimeMs <= Date.now()) {
     alert('Please choose a date in the future');
     event.target.disabled = true;
     return;
@@ -41,8 +41,9 @@ startButton.addEventListener('click', event => {
 });
 
 function timerUpdate() {
-  const timeDifference = selectedTimeMs - new Date().getTime();
-  const { days, hours, minutes, seconds } = convertMs(timeDifference);
+  const { days, hours, minutes, seconds } = convertMs(
+    selectedTimeMs - Date.now()
+  );
   daysNode.textContent = days.toString().padStart(2, '0');
   hoursNode.textContent = hours.toString().padStart(2, '0');
   minutesNode.textContent = minutes.toString().padStart(2, '0');
