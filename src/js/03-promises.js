@@ -16,9 +16,10 @@ formNode.addEventListener('submit', event => {
   event.preventDefault();
 
   for (let i = 1; i <= formNode.elements.amount.value; i += 1) {
-    const delay =
-      parseInt(formNode.elements.delay.value) +
-      parseInt(formNode.elements.step.value) * (i - 1);
+    initialDelay = parseInt(formNode.elements.delay.value);
+    delayStep = parseInt(formNode.elements.step.value);
+
+    const delay = initialDelay + delayStep * (i - 1);
 
     setTimeout(() => {
       createPromise(i, delay)
